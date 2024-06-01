@@ -11,7 +11,6 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
     </Routes>
-     <h1 className='text-3xl font-bold underline'>Hello</h1>
     </>
   )
 }
