@@ -6,20 +6,62 @@ import { SiOpenlayers } from "react-icons/si";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
+import { FaRegStar } from "react-icons/fa";
 import heroBackground from '../Assets/hero.mp4'
 import courseFeatureBackground from '../Assets/courseFeatureBackground.jpg'
 import SementicRightImage from '../Assets/SementicRightImage.png'
 import coursePageCover from '../Assets/coursePageCover.webp'
 import blogThumbnail from '../Assets/blogThumbnail.jpeg'
 import courseThumbain from '../Assets/courseThumbnail.jpg'
+import blanckBackground from '../Assets/blanckBackground.png'
+import courseImage1 from '../Assets/courseImage1.webp'
+import courseImage2 from '../Assets/courseImage2.webp'
+import courseImage3 from '../Assets/courseImage3.webp'
+import { useRef, useEffect } from 'react';
 
-const courseFeature = [
-    'https://images.pexels.com/photos/2781195/pexels-photo-2781195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/2681319/pexels-photo-2681319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    'https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-];
+// const courseFeature = [
+//     'https://images.pexels.com/photos/2781195/pexels-photo-2781195.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+//     'https://images.pexels.com/photos/2681319/pexels-photo-2681319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+//     'https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+// ];
 
+const createObserver = (ref, className) => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(className);
+        } else {
+          entry.target.classList.remove(className);
+        }
+      },
+      { threshold: 0.1 } // Adjust this threshold as needed
+    );
+  
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+  
+    return observer;
+  };
+  
+  const closeObserver = (ref, observer) => {
+    if (ref.current) {
+      observer.unobserve(ref.current);
+    }
+  };
 const Home = () => {
+    const sectionRef1 = useRef(null);
+    const sectionRef2 = useRef(null);
+
+    useEffect(() => {
+    const observer1 = createObserver(sectionRef1, 'feature-course-page');
+    const observer2 = createObserver(sectionRef2, 'sementic');
+  
+      return () => {
+        closeObserver(sectionRef1, observer1);
+        closeObserver(sectionRef2, observer2);
+      };
+    }, []);
     return (
         <>
             <LandingPage>
@@ -59,44 +101,45 @@ const Home = () => {
                         </nav>
                     </header>    
                     {/* hero part */}
-                    <div>
+                    <div className='hero'>
                         <div className='h-screen' >
                             <video src={heroBackground} autoPlay loop muted className='h-full w-full object-cover'></video>
                             <div className='absolute top-0 text-white h-full flex flex-col justify-center w-4/5 px-5'>
-                                <h1 className='font-semibold text-9xl leading-tight'>Master the Stock Market with Our Expert-Led Courses</h1>
-                                <p className='text-5xl font-normal mt-10 leading-snug'>Learn the secrets of stock market investing from industry professionals.</p>
+                                <h1 className='font-semibold text-9xl	 leading-tight'>Master the Stock Market with Our Expert-Led Courses</h1>
+                                <p className='text-5xl font-normal mt-10 leading-snug '>Learn the secrets of stock market investing from industry professionals.</p>
                             </div>
 
                         </div>
                     </div>
                 </div>
                 {/* feature Course Page */}
-                <div className='feature-course-page my-10'>
+                <div  ref={sectionRef1} className="">
+                <div className='my-10'>
                     <h1 className='text-8xl text-center my-10'>Our Course Feature</h1>
                     {/* container */}
-                    <div className='feature-container p-8 flex justify-around flex-wrap'> 
+                    <div className='feature-container p-8 py-24 flex justify-around flex-wrap'> 
                         {/* card */}
-                        <div className='course-feature w-72'>
+                        <div className='course-feature w-80 bg-white  rounded-lg '>
                             {/* image */}
-                            <div className='h-96 rounded-lg border-4 border-black'></div>
+                            <div className='h-96 rounded-lg  '></div>
                             {/* content */}
                             <div className='py-4'>
                                 <h4 className='text-lg font-bold'>Beginner’s Guide to Stock Market Investing</h4>
                                 <p className='text-base'>Understand the basics, start investing, and manage risks.</p>
                             </div>
                         </div>
-                        <div className='course-feature w-72'>
+                        <div className='course-feature w-80 bg-white  rounded-lg '>
                             {/* image */}
-                            <div className='h-96 rounded-lg border-4 border-black'></div>
+                            <div className='h-96 rounded-lg  '></div>
                             {/* content */}
                             <div className='py-4'>
                                 <h4 className='text-lg font-bold'>Beginner’s Guide to Stock Market Investing</h4>
                                 <p className='text-base'>Understand the basics, start investing, and manage risks.</p>
                             </div>
                         </div>
-                        <div className='course-feature w-72'>
+                        <div className='course-feature w-80 bg-white  rounded-lg '>
                             {/* image */}
-                            <div className='h-96 rounded-lg border-4 border-black'></div>
+                            <div className='h-96 rounded-lg  '></div>
                             {/* content */}
                             <div className='py-4'>
                                 <h4 className='text-lg font-bold'>Beginner’s Guide to Stock Market Investing</h4>
@@ -105,10 +148,11 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
+                </div>
                 {/* Sementic */}
-                <div className='grid grid-cols-2 gap-10 px-5 my-10'> 
+                <div ref={sectionRef2} className='grid grid-cols-2 gap-10 px-5 py-20 my-10'> 
                     {/* left */}
-                    <div className='flex flex-col'>
+                    <div className='flex flex-col sementic-left'>
                         <div className='self-center'>
                             <h2 className='text-7xl	mb-10 '>Schematic</h2>
                             <button className='text-xl border-2 rounded-3xl border-black py-2 px-7'>Brand Identity</button>    
@@ -137,7 +181,7 @@ const Home = () => {
                         </div>
                     </div>
                     {/* right */}
-                    <div>
+                    <div className='content-center sementic-right'>
                         <div className='p-10'>
                             <img src={SementicRightImage} alt="" width="100%" />
                         </div>
@@ -147,12 +191,12 @@ const Home = () => {
                 <div className='my-10 py-10'>
                     <h1 className='text-8xl text-center my-10'>Course</h1>
                     {/* container */}
-                    <div className='p-8 flex justify-around flex-wrap'> 
+                    <div className='p-8 flex flex-wrap gap-20 justify-center'> 
                         {/* card */}
-                        <div className='border-2 border-black'>
+                        <div className='course-card rounded-lg p-4 pt-2'>
                             {/* image */}
                             <div className='h-52 w-80'>
-                                <img src={courseThumbain} alt="" className='h-full object-cover	'/>
+                                <img src={courseThumbain} alt="" className='h-full object-cover border-8  border-white rounded-2xl	'/>
                             </div>
                             {/* content */}
                             <div className=''>
@@ -170,7 +214,69 @@ const Home = () => {
                                 <div className='p-4 flex justify-between font-semibold py-1 px-2'>
                                     <div>
                                         <p className='mb-2'>Price Value</p>
-                                        <i>Star</i>
+                                        <FaRegStar fill='yellow'/>
+                                    </div>
+                                    <div className='text-center'>
+                                        <p className='mb-2'>599 Rs.</p>
+                                        <button className='text-white bg-red-600 py-1 px-3 rounded-xl '>Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* card */}
+                        <div className='course-card rounded-lg p-4 pt-2'>
+                            {/* image */}
+                            <div className='h-52 w-80'>
+                                <img src={courseThumbain} alt="" className='h-full object-cover border-8  border-white rounded-2xl	'/>
+                            </div>
+                            {/* content */}
+                            <div className=''>
+                                <div className='max-w-80 py-2 px-3'>
+                                    <button className='bg-[#2495D6] text-white py-1 px-3 rounded-md'>Begginer</button>
+                                    <p className='text-[#2495D6]'>Programming Language</p>
+                                    <p className='font-bold text-xl font-bold		'>Angular - The Complete Guide (2020 Edition)</p>
+                                    <p className='text-base	 font-semibold '>From Setup to Deployment, this course it all! You’ll Learn all.</p>
+                                </div>
+
+                                <div className='flex bg-gray-900 text-white justify-between px-4 py-1'>
+                                    <span>Instructor</span>
+                                    <span>Name</span>
+                                </div>
+                                <div className='p-4 flex justify-between font-semibold py-1 px-2'>
+                                    <div>
+                                        <p className='mb-2'>Price Value</p>
+                                        <FaRegStar fill='yellow'/>
+                                    </div>
+                                    <div className='text-center'>
+                                        <p className='mb-2'>599 Rs.</p>
+                                        <button className='text-white bg-red-600 py-1 px-3 rounded-xl '>Add to cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* card */}
+                        <div className='course-card rounded-lg p-4 pt-2'>
+                            {/* image */}
+                            <div className='h-52 w-80'>
+                                <img src={courseThumbain} alt="" className='h-full object-cover border-8  border-white rounded-2xl	'/>
+                            </div>
+                            {/* content */}
+                            <div className=''>
+                                <div className='max-w-80 py-2 px-3'>
+                                    <button className='bg-[#2495D6] text-white py-1 px-3 rounded-md'>Begginer</button>
+                                    <p className='text-[#2495D6]'>Programming Language</p>
+                                    <p className='font-bold text-xl font-bold		'>Angular - The Complete Guide (2020 Edition)</p>
+                                    <p className='text-base	 font-semibold '>From Setup to Deployment, this course it all! You’ll Learn all.</p>
+                                </div>
+
+                                <div className='flex bg-gray-900 text-white justify-between px-4 py-1'>
+                                    <span>Instructor</span>
+                                    <span>Name</span>
+                                </div>
+                                <div className='p-4 flex justify-between font-semibold py-1 px-2'>
+                                    <div>
+                                        <p className='mb-2'>Price Value</p>
+                                        <FaRegStar fill='yellow'/>
                                     </div>
                                     <div className='text-center'>
                                         <p className='mb-2'>599 Rs.</p>
@@ -180,15 +286,15 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='text-center text-3xl'>
+                    <div className='text-center text-3xl my-20'>
                         <button className='inline-flex	 gap-5 text-white bg-red-600 py-2 px-6 rounded-3xl'><SiOpenlayers />View All</button>
                     </div>
                 </div>
                 {/* Subscription */}
-                <div className='text-center'>
-                    <h1 className='text-6xl max-w-2xl'>Choice your best <span className='font-semibold'>SUBSCRIPTION</span>Plan</h1>
-                    <div className='p-8 flex justify-around flex-wrap'> 
-                        <div className='border-2 border-black rounded-3xl	'>
+                <div className='text-center ng-white'>
+                    <h1 className='text-6xl max-w-2xl my-6 m-auto leading-tight'>Choice your best <span className='font-semibold'>SUBSCRIPTION</span>Plan</h1>
+                    <div className='p-8 flex justify-around flex-wrap py-20'> 
+                        <div className='rounded-3xl subscription-card border-8'>
                         {/* card */}
                             <div className='p-6'>
                                 <h2 className='text-5xl py-3 px-12 bg-red-600 rounded-full font-semibold'>Monthly</h2>
@@ -205,49 +311,7 @@ const Home = () => {
                                             <li>Monthly Report</li>
                                         </ul>
                                     </div>
-                                    <button className='text-2xl py-2.5 bg-red-600 rounded-full font-semibold'>Join</button>
-                                </div>
-                            </div>                            
-                        </div>
-                        <div className='border-2 border-black rounded-3xl m-auto'>
-                        {/* card */}
-                            <div className='p-6'>
-                                <h2 className='text-5xl py-3 px-12 bg-red-600 rounded-full font-semibold'>Monthly</h2>
-                                <div className='flex flex-col subcription-card'>
-                                    <div className='font-semibold my-7'>
-                                        <p className='text-5xl'>25 Rs</p>
-                                        <p className='text-2xl'>Per Month</p>
-                                    </div>
-                                    <div className='self-center mb-5'>
-                                        <ul className='text-2xl list-disc text-start'>
-                                            <li>Data Analyst</li>
-                                            <li>Up to 5 Member</li>
-                                            <li>Get 5 GB Storage</li>
-                                            <li>Monthly Report</li>
-                                        </ul>
-                                    </div>
-                                    <button className='text-2xl py-2.5 bg-red-600 rounded-full font-semibold'>Join</button>
-                                </div>
-                            </div>                            
-                        </div>
-                        <div className='border-2 border-black rounded-3xl	'>
-                        {/* card */}
-                            <div className='p-6'>
-                                <h2 className='text-5xl py-3 px-12 bg-red-600 rounded-full font-semibold'>Monthly</h2>
-                                <div className='flex flex-col subcription-card'>
-                                    <div className='font-semibold my-7'>
-                                        <p className='text-5xl'>25 Rs</p>
-                                        <p className='text-2xl'>Per Month</p>
-                                    </div>
-                                    <div className='self-center mb-5'>
-                                        <ul className='text-2xl list-disc text-start'>
-                                            <li>Data Analyst</li>
-                                            <li>Up to 5 Member</li>
-                                            <li>Get 5 GB Storage</li>
-                                            <li>Monthly Report</li>
-                                        </ul>
-                                    </div>
-                                    <button className='text-2xl py-2.5 bg-red-600 rounded-full font-semibold'>Join</button>
+                                    <button className='text-2xl text-white py-2.5 bg-red-600 rounded-full font-semibold'>Join</button>
                                 </div>
                             </div>                            
                         </div>
@@ -293,170 +357,99 @@ const Home = () => {
                         <h1 className='text-7xl	mb-10'>What we do</h1>
                         <p className='text-4xl	'>Elevate your brand and make your mark in history.</p>
                     </div>
-                    <div className='mt-20' >
-                        <div className='flex justify-around mb-10'>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                    <div className='mt-20 ' >
+                        <div className='flex justify-around mb-10 grid grid-cols-3 gap-10'>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
                         </div>
-                        <div className='flex justify-around'>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
-                            <button className='text-xl py-6 px-32 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                        <div className='flex justify-around grid grid-cols-3 gap-10'>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
+                            <button className='text-xl py-6 px-24 rounded-3xl border-2 border-black flex items-center gap-5	'>Trading Guide <FaArrowRightLong /></button>
                         </div>
                     </div>
                     
 
                 </div>
                 {/* Course Details */}
-                <div className='py-20'>
-                    {/* upper part */}
-                    <div className='course-page py-12 px-5 flex gap-10 justify-center'>
-                        {/* left */}
-                        <div className='max-w-2xl course-page-left'>
-                            <div>
-                                {/* navigation  */}
-                                <div className='course-page-nav' >
-                                    <span>Home <FaChevronRight /></span>
-                                    <span>Course <FaChevronRight /></span>
-                                    <span>Course Name</span>
-                                </div>     
-                                <div>
-                                    <h1 className='text-4xl font-semibold mt-2'>Course Name</h1>
-                                    <h2 className='text-lg my-5 leading-9'>Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, adipisci minus alias expedita provident Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, adipisci minus alias expedita provident</h2>
-                                </div>
-                                <div className='flex gap-10'>
-                                    <p>432 Learners</p> 
-                                    <p>Sale end : 01:01:01</p>
-                                </div>
-                            </div>
-                            <div className='mt-32 pt-5'>
-                                <nav>
-                                    <ul className='flex gap-10'>
-                                        <li className='' >About Course</li>
-                                        <li>Course Objective</li>
-                                        <li>Requirement</li>
-                                        <li>Course Review</li>
-                                        <li>FAQs</li>
-                                    </ul>
-                                </nav>
-                                {/* About part */}
-                                <div>
-                                    <h2>About Course</h2>
-                                    <p>It looks like you want information about a specific course or courses in general. Could you please provide more details or specify the course you are interested in? For example, are you looking for details about a university course, an online course, or a particular subject? This will help me provide the most relevant information.
-                                    <ul className='course-page-left-list list-disc ps-20 py-5 flex flex-col gap-3'>
-                                        <li>Data Structures and Algorithms</li>
-                                        <li>Operating Systems</li>
-                                        <li>Artificial Intelligence</li>
-                                        <li>Database Systems</li>
-                                        <li>Software Engineering</li>
-                                    </ul>
-                                    </p>
-                                </div>
-                                {/* Intendent Learning Objective */}
-                                <div>
-                                    <p>This HTML code organizes the Intended Learning Objectives for various courses into a clear, hierarchical list format, making it easy to read and navigate. You can further customize this list as needed.</p>
-                                    <ul className='course-page-left-list list-disc ps-10 py-5 grid grid-cols-2 gap-7 '>
-                                        <li>Understand the key concepts and .</li>
-                                        <li>Analyze the internal and external .</li>
-                                        <li>Develop strategic plans .</li>
-                                        <li>Apply strategic management tools to real.</li>
-                                        <li>Understand the ethical and global .</li>
-                                    </ul>
-                            </div>
-                            {/* <div>
-                                <p>Rating</p>
-                                <div>
-                                    <div>
-                                        <h1>4.8</h1>
-                                        <p>stars</p>
-                                        <p>3435 review</p>
-                                    </div>
-                                    <div>
-                                        <ul>
-                                            <li>
-                                                <span>5 Start</span>
-                                                <input type="range" min="0" max="100"/>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> */}
-                            {/* Review feedback Here*/}
-                            <div></div>
-                            </div>
-                        </div>
-                        {/* right */}
-                        <div className='p-3 rounded-lg bg-white' >
-                                <div className='max-w-96' >
-                                    {/* Thumbnail */}
-                                    <div className='w-full' >
-                                        <img src="https://cdn6.f-cdn.com/contestentries/1162950/18299824/59ef996d1981d_thumb900.jpg" width='100%' alt="" className='rounded-lg' />
-                                    </div>
-                                    {/* Content */}
-                                    <div className='p-5'>
-                                        <h1 className='text-4xl text-center mb-3'>452200 Rs</h1>
-                                        <div>
-                                            <div className=' flex justify-between'>
-                                                <button className='w-4/5 bg-gray-900  text-white rounded-lg '>Add to Card</button>
-                                                <div className='p-4 border-2 border-black'>
-                                                    <FaRegHeart />
-                                                </div>
-                                            </div>
-                                            <button className='w-full border-2 border-black rounded-lg px-12 py-3 mt-4'>Buy Now</button>
-                                        </div>
-                                        <ul className='course-page-right-desc flex flex-col py-3 px-7'>
-                                            <li>Time <span>60 Min</span></li>
-                                            <li>Time <span>60 Min</span></li>
-                                            <li>Time <span>60 Min</span></li>
-                                            <li>Time <span>60 Min</span></li>
-                                        </ul>
-                                    </div>
-                                    {/* Instructor */}
-                                    <div>
-                                        <h3 className='text-3xl font-semibold' >Instructor</h3>
-                                        <div className='mt-5'>
-                                            <div className='flex gap-5 px-5 items-center	'>
-                                                {/* user image */}
-                                                <div className='max-w-8	' >
-                                                    <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" width='100%' alt="" />
-                                                </div>
-                                                <h4 className='font-semibold' >Name of Instructor</h4>
-                                            </div>
-                                            <div className='ps-16 mt-3'>
-                                            {/* describe */}
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora illo nobis atque earum
-                                            </div>
-                                        </div>
-                                        <div className='mt-5'>
-                                            <div className='flex gap-5 px-5 items-center	'>
-                                                {/* user image */}
-                                                <div className='max-w-8	' >
-                                                    <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" width='100%' alt="" />
-                                                </div>
-                                                <h4 className='font-semibold' >Name of Instructor</h4>
-                                            </div>
-                                            <div className='ps-16 mt-3'>
-                                            {/* describe */}
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora illo nobis atque earum
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                </div>
+         
             </LandingPage>            
         </>
     )       
 }
 export default Home;
 const LandingPage = styled.div`
+.hero h1{
+    font-size: 6.2vw;
+    /* line-height: 1.2px; */
+}
+.hero p {
+    font-size: 4vw;
+}
 .feature-course-page {
-    background-image: url(${courseFeatureBackground});
+  background-image: url(${courseFeatureBackground}); /* Placeholder URL */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.feature-course-page > div{
+    background-image: url(${blanckBackground}); /* Placeholder URL */
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-position: 1000px;
+    animation: slideGradient 15s forwards; 
+}
+
+@keyframes slideGradient {
+    0% {
+    background-position: 0px; 
+  }
+  100% {
+    background-position: 15000px; 
+  }
+}
+.feature-course-page .course-feature {
+   padding: 15px;
+   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+   animation: 1.5s fadeInUp;
+}  
+@keyframes fadeInUp {
+ 0% {
+   transform: translateY(40%);
+   opacity: 0;
+ }
+ 100% {
+   transform: translateY(0%);
+   opacity: 1;
+ }
+}
+
+.sementic .sementic-left {
+   animation: 1.5s fadeleft;
+}  
+@keyframes fadeleft {
+ 0% {
+   transform: translateX(-40%);
+   opacity: 0;
+ }
+ 100% {
+   transform: translateX(0%);
+   opacity: 1;
+ }
+}
+.sementic .sementic-right {
+   animation: 1.5s faderight;
+}  
+@keyframes faderight {
+ 0% {
+   transform: translateX(40%);
+   opacity: 0;
+ }
+ 100% {
+   transform: translateX(0%);
+   opacity: 1;
+ }
 }
  .feature-container > div > div:nth-child(1), .course-page{
     background-repeat: no-repeat;
@@ -464,14 +457,17 @@ const LandingPage = styled.div`
     background-position: center;
  }   
  .feature-container > div:nth-child(1) > div:nth-child(1){
-    background-image: url(${courseFeature[0]});
+    background-image: url(${courseImage1});
  }   
  .feature-container > div:nth-child(2) > div:nth-child(1){
-    background-image: url(${courseFeature[1]});
+    background-image: url(${courseImage2});
  }   
  .feature-container > div:nth-child(3) > div:nth-child(1) {
-    background-image: url(${courseFeature[2]});
- }   
+    background-image: url(${courseImage3});
+ } 
+ .course-card {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+ }
  .subcription-card li{
     margin-bottom: 16px;
  }
@@ -495,5 +491,8 @@ const LandingPage = styled.div`
     display: flex;
     justify-content: space-between;
     /* border: 1px solid black; */
+}
+.subscription-card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
 `
