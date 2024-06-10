@@ -1,5 +1,5 @@
-import mastercard from '../payment/mastercard.png'
-import visa from '../payment/visa.png'
+import mastercard from './mastercard.png'
+import visa from './visa.png'
 import { useState } from 'react';
 
 
