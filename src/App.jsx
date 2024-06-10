@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import './App.css'
-import Home from './component/home';
 import {Routes, Route} from 'react-router-dom';
+import PaymentForm from './payment/PaymentForm';
 
 
 function App() {
@@ -9,7 +7,7 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<PaymentForm/>}/>
     </Routes>
     </>
   )
