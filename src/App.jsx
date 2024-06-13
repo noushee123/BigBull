@@ -6,6 +6,8 @@ import RefundPolicy from './Nousheen/RefundPolicy';
 import PrivacyPolicy from './Nousheen/PrivacyPolicy';
 import ResetPassword from './Nousheen/ResetPassword';
 import VerificationPage from './Nousheen/VerificationPage';
+import Notification from './Nousheen/Notification';
+import Subscription from './Nousheen/Subscription';
 
 function App() {
   
@@ -19,6 +21,8 @@ function App() {
        <Route path='/privacypolicy' element={<PrivacyPolicy/>} /> 
        <Route path='/resetpassword' element={<ResetPassword/>} />
        <Route path='/verificationpage' element={<VerificationPage/>} />
+       <Route path='/notification' element={<Notification/>} />
+       <Route path='/subscription' element={<Subscription/>} />
     </Routes>
     </>
   )
