@@ -8,6 +8,7 @@ import ResetPassword from './Nousheen/ResetPassword';
 import VerificationPage from './Nousheen/VerificationPage';
 import Notification from './Nousheen/Notification';
 import Subscription from './Nousheen/Subscription';
+import Latestblog from './Nousheen/Latestblog';
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
        <Route path='/verificationpage' element={<VerificationPage/>} />
        <Route path='/notification' element={<Notification/>} />
        <Route path='/subscription' element={<Subscription/>} />
+       <Route path='/latestblog' element={<Latestblog/>} />
     </Routes>
     </>
   )
